@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block main %}
+<h2>Menu @ Eric Cho Burger Joint</h2>
+
+<style>
+    .item{
+        background-color:orange;
+        border-radius: 10px;
+        margin:1%;
+        width:31.33%;
+        padding: 10px 0px 10px 0px;
+    }
+    .header{
+        font-size:30px;
+        text-decoration: underline;
+    }
+    .menu{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        width:60%;
+    }
+</style>
+<div class="header">Burgers</div>
+<div class = "row">
+    <div class = "item">Cheese Burger ($6)<br/><img src = "/static/main-burger.jpg" class="menu"></img></div>
+    <div class = "item">Shrimp Burger ($7)<br/><img src = "/static/shrimp_burger.jpg" class="menu"></img></div>
+    <div class = "item">Mac-N-Cheese Burger ($7)<br/><img src = "/static/mac_n_cheese_burger.jpg" class="menu"></img></div>
+    <div class = "item">Avocado Burger ($8)<br/><img src = "/static/avocado_burger.jpg" class="menu"></img></div>
+</div>
+<div class="header">Sides</div>
+<div class = "row">
+    <div class = "item">Fries ($3)<br/><img src = "/static/fries.jpg" class="menu"></img></div>
+    <div class = "item">Cheese Fries ($4)<br/><img src = "/static/cheese_fries.jpg" class="menu"></img></div>
+    <div class = "item">Sweet Potato Fries ($4)<br/><img src = "/static/sweet_potato_fries.jpg" class="menu"></img></div>
+</div>
+<div class="header">Beverages</div>
+<div class = "row">
+    <div class = "item">Coke($2)<br/><img src = "/static/coke.jpg" class="menu"></img></div>
+    <div class = "item">Diet-Coke ($2)<br/><img src = "/static/diet_coke.jpg" class="menu"></img></div>
+    <div class = "item">Water ($1)<br/><img src = "/static/water.jpg" class="menu"></img></div>
+</div>
+
+
+{% endblock %}
