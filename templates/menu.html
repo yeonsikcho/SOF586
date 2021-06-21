@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block main %}
-<h2>Menu @ Eric Cho Burger Joint</h2>
-
 <style>
     .item{
         background-color:orange;
@@ -9,6 +7,26 @@
         margin:1%;
         width:31.33%;
         padding: 10px 0px 10px 0px;
+    }
+    .cart-item{
+        background-color:orange;
+        border-radius: 10px;
+        margin:1%;
+        width:100%;
+        padding: 10px 0px 10px 0px;
+    }
+    .order{
+        background-color:#fff;
+        border-radius: 10px;
+        margin:1%;
+        width:100%;
+        padding: 10px 0px 10px 0px;
+    }
+    .close{
+        border-radius:10px;
+    }
+    .close:hover{
+        box-shadow: 0 0 0 2px #fff, 0 0 0 2px;
     }
     .header{
         font-size:30px;
@@ -20,26 +38,117 @@
         margin-right:auto;
         width:60%;
     }
+    .sidebar{
+        background-color:rgb(214, 214, 214)
+    }
 </style>
-<div class="header">Burgers</div>
 <div class = "row">
-    <div class = "item">Cheese Burger ($6)<br/><img src = "/static/main-burger.jpg" class="menu"></img></div>
-    <div class = "item">Shrimp Burger ($7)<br/><img src = "/static/shrimp_burger.jpg" class="menu"></img></div>
-    <div class = "item">Mac-N-Cheese Burger ($7)<br/><img src = "/static/mac_n_cheese_burger.jpg" class="menu"></img></div>
-    <div class = "item">Avocado Burger ($8)<br/><img src = "/static/avocado_burger.jpg" class="menu"></img></div>
-</div>
-<div class="header">Sides</div>
-<div class = "row">
-    <div class = "item">Fries ($3)<br/><img src = "/static/fries.jpg" class="menu"></img></div>
-    <div class = "item">Cheese Fries ($4)<br/><img src = "/static/cheese_fries.jpg" class="menu"></img></div>
-    <div class = "item">Sweet Potato Fries ($4)<br/><img src = "/static/sweet_potato_fries.jpg" class="menu"></img></div>
-</div>
-<div class="header">Beverages</div>
-<div class = "row">
-    <div class = "item">Coke($2)<br/><img src = "/static/coke.jpg" class="menu"></img></div>
-    <div class = "item">Diet-Coke ($2)<br/><img src = "/static/diet_coke.jpg" class="menu"></img></div>
-    <div class = "item">Water ($1)<br/><img src = "/static/water.jpg" class="menu"></img></div>
+    <div class = "col-sm-10">
+        <h2>Menu @ Eric Cho Burger Joint</h2>
+
+        <div class="header">Burgers</div>
+        <div class = "row">
+            <button onclick = "add('cheeseburger')" class = "item">Cheese Burger ($6)<br/><img src = "/static/main-burger.jpg" class="menu"></img></button>
+            <button onclick = "add('shrimpburger')" class = "item">Shrimp Burger ($7)<br/><img src = "/static/shrimp_burger.jpg" class="menu"></img></button>
+            <button onclick = "add('macncheeseburger')" class = "item">Mac-N-Cheese Burger ($7)<br/><img src = "/static/mac_n_cheese_burger.jpg" class="menu"></img></button>
+            <button onclick = "add('avocadoburger')" class = "item">Avocado Burger ($8)<br/><img src = "/static/avocado_burger.jpg" class="menu"></img></button>
+        </div>
+        <div class="header">Sides</div>
+        <div class = "row">
+            <button onclick = "add('fries')" class = "item">Fries ($3)<br/><img src = "/static/fries.jpg" class="menu"></img></button>
+            <button onclick = "add('cheesefries')" class = "item">Cheese Fries ($4)<br/><img src = "/static/cheese_fries.jpg" class="menu"></img></button>
+            <button onclick = "add('sweetpotatofries')" class = "item">Sweet Potato Fries ($4)<br/><img src = "/static/sweet_potato_fries.jpg" class="menu"></img></button>
+        </div>
+        <div class="header">Beverages</div>
+        <div class = "row">
+            <button onclick = "add('coke')" class = "item">Coke($2)<br/><img src = "/static/coke.jpg" class="menu"></img></button>
+            <button onclick = "add('dietcoke')" class = "item">Diet-Coke ($2)<br/><img src = "/static/diet_coke.jpg" class="menu"></img></button>
+            <button onclick = "add('water')" class = "item">Water ($1)<br/><img src = "/static/water.jpg" class="menu"></img></button>
+        </div>
+    </div>
+    <div class = "col-sm-2 sidebar">
+        <div class = "header">Cart</div>
+        <div id = "cart"></div>
+        <div class = "header">Total</div>
+        <div id = "total"></div>
+        <!-- Button trigger modal -->
+        <button type="button" class="order" data-bs-toggle="modal" data-bs-target="#customer_detail">Order Now</button>
+    </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="customer_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class = "row">
+            <h5>Payment Detail</h5>
+            Credit card information here..
+        </div>
+        <div style = "margin-top:20px" class = "row">
+            <h5>Customer Information</h5>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input class="form-control" id="name" placeholder="Full Name">
+                <label for="exampleInputEmail1">Email</label>
+                <input class="form-control" id="email" placeholder="eric-cho@burgerjoint.com">
+                <label for="exampleInputEmail1">Address</label>
+                <input class="form-control" id="address" placeholder="123 burgerjoint road, Arlington VA 22204">
+                <label for="exampleInputEmail1">Phone Number</label>
+                <input class="form-control" id="email" placeholder="123-456-7890">
+              </div>
 
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to Menu</button>
+        <button type="button" class="btn btn-primary">Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var menu = {
+        cheeseburger:{price:6, name:'Cheese Burger'},
+        shrimpburger:{price:7, name:'Shrimp Burger'},
+        macncheeseburger:{price:7, name:'Mac-N-Cheese Burger'},
+        avocadoburger:{price:8, name:'Avocado Burger'},
+        fries:{price:3, name:'Fries'},
+        cheesefries:{price:4, name:'Cheese Fries'},
+        sweetpotatofries:{price:4, name:'Sweet Potato Fries'},
+        coke:{price:2, name:'Coke'},
+        dietcoke:{price:2,name:'Diet-Coke'},
+        water:{price:1,name:'Water'}
+    };
+    var cart = {};
+
+    function add(item){
+        if (!(item in cart)) cart[item] = 0;
+        cart[item]+=1;
+        update_cart();
+    }
+    $(document).on('click', '.close', function(event){
+        item = $(this).attr('id');
+        delete cart[item];
+        update_cart();
+    });
+    function update_cart(){
+        var html = '';
+        var num_items = 0;
+        var total = 0;
+        for (item in cart){
+            html+='<button type="button" class="cart-item" aria-label="Close">('+cart[item]+')'+menu[item].name+'<span id="'+item+'" class="close" aria-hidden="true">&times;</span></button>';
+            total+=cart[item]*menu[item].price
+            num_items+=cart[item];
+        }
+        document.getElementById('cart').innerHTML = html;
+        document.getElementById('total').innerHTML = num_items+' items. Total: $'+total;
+    }
+</script>
 {% endblock %}
