@@ -48,22 +48,22 @@
 
         <div class="header">Burgers</div>
         <div class = "row">
-            <button onclick = "add('cheeseburger')" class = "item">Cheese Burger ($6)<br/><img src = "/static/main-burger.jpg" class="menu"></img></button>
-            <button onclick = "add('shrimpburger')" class = "item">Shrimp Burger ($7)<br/><img src = "/static/shrimp_burger.jpg" class="menu"></img></button>
-            <button onclick = "add('macncheeseburger')" class = "item">Mac-N-Cheese Burger ($7)<br/><img src = "/static/mac_n_cheese_burger.jpg" class="menu"></img></button>
-            <button onclick = "add('avocadoburger')" class = "item">Avocado Burger ($8)<br/><img src = "/static/avocado_burger.jpg" class="menu"></img></button>
+            <button onclick = "add('cheeseburger')" class = "item">Cheese Burger (${{ cheeseburger }})<br/><img src = "/static/main-burger.jpg" class="menu"></img></button>
+            <button onclick = "add('shrimpburger')" class = "item">Shrimp Burger (${{ shrimpburger }})<br/><img src = "/static/shrimp_burger.jpg" class="menu"></img></button>
+            <button onclick = "add('macncheeseburger')" class = "item">Mac-N-Cheese Burger (${{macncheeseburger}})<br/><img src = "/static/mac_n_cheese_burger.jpg" class="menu"></img></button>
+            <button onclick = "add('avocadoburger')" class = "item">Avocado Burger (${{avocadoburger}})<br/><img src = "/static/avocado_burger.jpg" class="menu"></img></button>
         </div>
         <div class="header">Sides</div>
         <div class = "row">
-            <button onclick = "add('fries')" class = "item">Fries ($3)<br/><img src = "/static/fries.jpg" class="menu"></img></button>
-            <button onclick = "add('cheesefries')" class = "item">Cheese Fries ($4)<br/><img src = "/static/cheese_fries.jpg" class="menu"></img></button>
-            <button onclick = "add('sweetpotatofries')" class = "item">Sweet Potato Fries ($4)<br/><img src = "/static/sweet_potato_fries.jpg" class="menu"></img></button>
+            <button onclick = "add('fries')" class = "item">Fries (${{fries}})<br/><img src = "/static/fries.jpg" class="menu"></img></button>
+            <button onclick = "add('cheesefries')" class = "item">Cheese Fries (${{cheesefries}})<br/><img src = "/static/cheese_fries.jpg" class="menu"></img></button>
+            <button onclick = "add('sweetpotatofries')" class = "item">Sweet Potato Fries (${{sweetpotatofries}})<br/><img src = "/static/sweet_potato_fries.jpg" class="menu"></img></button>
         </div>
         <div class="header">Beverages</div>
         <div class = "row">
-            <button onclick = "add('coke')" class = "item">Coke($2)<br/><img src = "/static/coke.jpg" class="menu"></img></button>
-            <button onclick = "add('dietcoke')" class = "item">Diet-Coke ($2)<br/><img src = "/static/diet_coke.jpg" class="menu"></img></button>
-            <button onclick = "add('water')" class = "item">Water ($1)<br/><img src = "/static/water.jpg" class="menu"></img></button>
+            <button onclick = "add('coke')" class = "item">Coke(${{coke}})<br/><img src = "/static/coke.jpg" class="menu"></img></button>
+            <button onclick = "add('dietcoke')" class = "item">Diet-Coke (${{dietcoke}})<br/><img src = "/static/diet_coke.jpg" class="menu"></img></button>
+            <button onclick = "add('water')" class = "item">Water (${{water}})<br/><img src = "/static/water.jpg" class="menu"></img></button>
         </div>
     </div>
     <div class = "col-sm-2 sidebar">
@@ -92,14 +92,14 @@
         <div style = "margin-top:20px" class = "row">
             <h5>Customer Information</h5>
             <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
+                <label>Name</label>
                 <input class="form-control" id="name" placeholder="Full Name">
-                <label for="exampleInputEmail1">Email</label>
+                <label>Email</label>
                 <input class="form-control" id="email" placeholder="eric-cho@burgerjoint.com">
-                <label for="exampleInputEmail1">Address</label>
+                <label>Address</label>
                 <input class="form-control" id="address" placeholder="123 burgerjoint road, Arlington VA 22204">
-                <label for="exampleInputEmail1">Phone Number</label>
-                <input class="form-control" id="email" placeholder="123-456-7890">
+                <label>Phone Number</label>
+                <input class="form-control" id="phone" placeholder="123-456-7890">
               </div>
 
         </div>
@@ -107,7 +107,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to Menu</button>
-        <button type="button" class="btn btn-primary">Place Order</button>
+        <button type="button" class="btn btn-primary" onclick="place_order()">Place Order</button>
       </div>
     </div>
   </div>
@@ -115,16 +115,16 @@
 
 <script>
     var menu = {
-        cheeseburger:{price:6, name:'Cheese Burger'},
-        shrimpburger:{price:7, name:'Shrimp Burger'},
-        macncheeseburger:{price:7, name:'Mac-N-Cheese Burger'},
-        avocadoburger:{price:8, name:'Avocado Burger'},
-        fries:{price:3, name:'Fries'},
-        cheesefries:{price:4, name:'Cheese Fries'},
-        sweetpotatofries:{price:4, name:'Sweet Potato Fries'},
-        coke:{price:2, name:'Coke'},
-        dietcoke:{price:2,name:'Diet-Coke'},
-        water:{price:1,name:'Water'}
+        cheeseburger:{price:{{ cheeseburger }}, name:'Cheese Burger'},
+        shrimpburger:{price:{{ shrimpburger }}, name:'Shrimp Burger'},
+        macncheeseburger:{price:{{ macncheeseburger }}, name:'Mac-N-Cheese Burger'},
+        avocadoburger:{price:{{ avocadoburger }}, name:'Avocado Burger'},
+        fries:{price:{{ fries }}, name:'Fries'},
+        cheesefries:{price:{{ cheesefries }}, name:'Cheese Fries'},
+        sweetpotatofries:{price:{{ sweetpotatofries }}, name:'Sweet Potato Fries'},
+        coke:{price:{{ coke }}, name:'Coke'},
+        dietcoke:{price:{{ dietcoke }},name:'Diet-Coke'},
+        water:{price:{{ water }},name:'Water'}
     };
     var cart = {};
 
@@ -150,5 +150,19 @@
         document.getElementById('cart').innerHTML = html;
         document.getElementById('total').innerHTML = num_items+' items. Total: $'+total;
     }
+    function place_order(){
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var address = $("#address").val();
+        var phone = $("#phone").val();
+        $.ajax({
+		url: "/place_order",
+		data: {customer:JSON.stringify({name:name, email:email, address:address, phone:phone}),
+                cart:JSON.stringify(cart)},
+		dataType: 'json',
+		success: function (data) {
+            alert(data.msg);
+    		}})
+        }
 </script>
 {% endblock %}
