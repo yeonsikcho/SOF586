@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import MySQLdb as sql
+# import MySQLdb as sql
+import psycopg2
 import datetime
 import json
 
@@ -17,7 +18,8 @@ def contact(request):
     return render(request, 'contact.html')
 
 def menu(request):
-    con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
+    con = psycopg2.connect(host = 'hostinger.eric-cho.com', database = 'postgres', user = 'postgres', password = '0501cho', port = '5432')
+    # con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
     cursor = con.cursor()
     #Get menu prices
     cursor.execute("select * from menu_items")
@@ -28,7 +30,8 @@ def menu(request):
 def place_order(request):
     cart = json.loads(request.GET.get('cart'))
     customer = json.loads(request.GET.get('customer'))
-    con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
+    con = psycopg2.connect(host = 'hostinger.eric-cho.com', database = 'postgres', user = 'postgres', password = '0501cho', port = '5432')
+    # con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
     cursor = con.cursor()
     #Get menu item to id map
     cursor.execute("select menu_name, id from menu_items")
@@ -55,7 +58,8 @@ def place_order(request):
     return JsonResponse({'msg':'Order submited successfully'})
 
 def shopper_history_report(request):
-    con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
+    con = psycopg2.connect(host = 'hostinger.eric-cho.com', database = 'postgres', user = 'postgres', password = '0501cho', port = '5432')
+    # con = sql.connect(host = 'analytiq.co.kr', user = 'sof586', database = 'sof586', charset = 'utf8')
     cursor = con.cursor()
     cursor.execute("""select name, order_id, order_time, menu_name, quantity from orders 
     inner join customer on orders.customer_id = customer.id 
